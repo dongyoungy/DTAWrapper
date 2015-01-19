@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="DTAWrapper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DTAWrapper_jar</output-path>
+    <root id="root">
+      <element id="archive" name="DTAWrapper.jar">
+        <element id="module-output" name="DTAWrapper" />
+      </element>
+      <element id="library" level="project" name="gsp" />
+      <element id="library" level="project" name="sqljdbc4" />
+    </root>
+  </artifact>
+</component>
