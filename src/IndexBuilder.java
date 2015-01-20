@@ -99,7 +99,7 @@ public class IndexBuilder
 			rs.close();
 
 			stmt = conn.createStatement();
-			String sqlGetIndexedViews = "SELECT o.object_id, o.name as view_name, i.name as index_name, i.index_id, i.is_disabled, s.name as schema_name " +
+			String sqlGetIndexedViews = "SELECT o.object_id, o.name as view_name, i.*, s.name as schema_name " +
 					"FROM sys.objects o " +
 					"INNER JOIN sys.indexes i ON o.object_id = i.object_id " +
 					"INNER JOIN sys.views v ON v.object_id = i.object_id " +
@@ -113,10 +113,15 @@ public class IndexBuilder
 
 				newView.setObjectId(indexedViews.getInt("object_id"));
 				newView.setIndexId(indexedViews.getInt("index_id"));
-				newView.setIndexName(indexedViews.getString("index_name"));
+				newView.setIndexName(indexedViews.getString("name"));
+				newView.setIndexType(indexedViews.getInt("type"));
 				newView.setViewName(indexedViews.getString("view_name"));
 				newView.setSchemaName(indexedViews.getString("schema_name"));
 				newView.setIsDisabled(indexedViews.getInt("is_disabled"));
+				newView.setIsPrimaryKey(indexedViews.getInt("is_primary_key"));
+				newView.setIsDisabled(indexedViews.getInt("is_disabled"));
+				newView.setIsUnique(indexedViews.getInt("is_unique"));
+				newView.setIsUniqueConstraint((indexedViews.getInt("is_unique_constraint")));
 
 				String sqlGetViewDefinition = "SELECT definition from sys.sql_modules WHERE object_id = ?";
 				PreparedStatement viewDefinitionStmt = conn.prepareStatement(sqlGetViewDefinition);

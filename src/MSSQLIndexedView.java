@@ -20,7 +20,12 @@ public class MSSQLIndexedView
 
 	private int objectId;
 	private int indexId;
+	private int indexType;
+
 	private int isDisabled;
+	private int isUnique;
+	private int isPrimaryKey;
+	private int isUniqueConstraint;
 
 	public MSSQLIndexedView()
 	{
@@ -36,7 +41,7 @@ public class MSSQLIndexedView
 
 	public void print()
 	{
-		System.out.println(String.format("INDEXED VIEW: [INDEX: %s.%s ON %s] (is_disabled: %d)", schemaName, indexName, viewName, isDisabled));
+		System.out.println(String.format("INDEXED VIEW: [INDEX: %s.%s ON %s] (type: %d, is_disabled: %d)", schemaName, indexName, viewName, indexType, isDisabled));
 		System.out.println("Columns:");
 		for (int i = 0; i < columns.size(); ++i)
 		{
@@ -120,6 +125,46 @@ public class MSSQLIndexedView
 	public void setIndexId(int indexId)
 	{
 		this.indexId = indexId;
+	}
+
+	public int getIndexType()
+	{
+		return indexType;
+	}
+
+	public void setIndexType(int indexType)
+	{
+		this.indexType = indexType;
+	}
+
+	public int getIsUnique()
+	{
+		return isUnique;
+	}
+
+	public void setIsUnique(int isUnique)
+	{
+		this.isUnique = isUnique;
+	}
+
+	public int getIsPrimaryKey()
+	{
+		return isPrimaryKey;
+	}
+
+	public void setIsPrimaryKey(int isPrimaryKey)
+	{
+		this.isPrimaryKey = isPrimaryKey;
+	}
+
+	public int getIsUniqueConstraint()
+	{
+		return isUniqueConstraint;
+	}
+
+	public void setIsUniqueConstraint(int isUniqueConstraint)
+	{
+		this.isUniqueConstraint = isUniqueConstraint;
 	}
 
 	public int getIsDisabled()
